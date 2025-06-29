@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>魔法定位学院</title>
+    <style>
+        body {
+            width: 100%;
+            margin: 0;
+            background: #1a0a2b;
+            color: #f0e6d2;
+            font-family: '华文行楷', cursive;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .spell-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+
+        .spell-card {
+            background: #2a0a4f;
+            padding: 2rem;
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .spell-card:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: #d4af37;
+            border-bottom: 2px solid;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        p {
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+
+        .magic-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        code {
+            display: block;
+            background: rgba(212, 175, 55, 0.1);
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 4px;
+            color: #d4af37;
+        }
+
+        @media (max-width: 768px) {
+            .spell-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="spell-grid">
+            <div class="spell-card">
+                <div class="magic-icon">🦉</div>
+                <h2>飞行课定位</h2>
+                <p>在清晨的薄雾中，扫帚遵循自然法则悬浮，如同标准文档流中的元素排列</p>
+                <p>麦格教授示范如何保持平衡：「记住，重心要像position: static般稳定」</p>
+                <code>.broomstick { position: static; }</code>
+            </div>
+
+            <div class="spell-card">
+                <div class="magic-icon">⚡</div>
+                <h2>幻影移形</h2>
+                <p>当巫师念出「Relativo!」咒语，身形会相对原位置偏移，但保留原有空间</p>
+                <p class="bg">斯内普警告：「过度偏移会导致魔药洒落，top值慎用！」</p>
+                <code>.apparition { position: relative; top: 150px; }</code>
+            </div>
+
+            <div class="spell-card">
+                <div class="magic-icon">🧙</div>
+                <h2>门钥匙</h2>
+                <p>激活的旧靴子会脱离文档流，绝对定位于最近的已定位祖先容器</p>
+                <p>邓布利多提醒：「若无锚点容器，将直抵魔法部大厅！」</p>
+                <code>.portkey { position: absolute; top: 150px; }</code>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
