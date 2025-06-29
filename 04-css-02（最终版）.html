@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>霍格沃茨魔法学院</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #2a0a4f, #4b0082);
+            color: #f0e6d2;
+            font-family: 'Microsoft YaHei';
+            line-height: 1.6;
+        }
+
+        .header {
+            background-image: url("./images/780.jpg");
+            background-position: center;
+            background-size: cover;
+            padding: 2rem;
+            border-bottom: 3px solid #d4af37;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .magic-title {
+            font-size: 2.5rem;
+            color: #d4af37;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+
+        .house-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .house-card {
+            background: #1a0a2b;
+            border: 2px solid #d4af37;
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .house-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .timetable {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .magic-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="magic-title">霍格沃茨魔法学院</h1>
+    </header>
+
+    <main class="content-section">
+        <section class="house-grid">
+            <article class="house-card">
+                <h2>格兰芬多</h2>
+                <p>勇气、胆识与气魄的象征，学院标志为金红狮鹫。现任院长：米勒娃·麦格</p>
+            </article>
+            <article class="house-card">
+                <h2>斯莱特林</h2>
+                <p>精明、野心与纯血统的拥护者，学院色为银绿，代表动物是蛇</p>
+            </article>
+            <article class="house-card">
+                <h2>拉文克劳</h2>
+                <p>智慧与学识的殿堂，青铜与蓝色的装饰象征着翱翔的雄鹰</p>
+            </article>
+            <article class="house-card">
+                <h2>赫奇帕奇</h2>
+                <p>忠诚与勤奋的代名词，土黄色与黑色代表着大地的馈赠</p>
+            </article>
+        </section>
+
+        <div class="timetable">
+            <h2>本周课程表</h2>
+            <div class="house-card">
+                <p>周一：魔药课 (地牢) | 黑魔法防御术 (三楼)</p>
+                <p>周三：飞行课 (球场) | 占卜学 (北塔楼)</p>
+                <p>周五：神奇动物保护 (禁林边缘)</p>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
