@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻编辑部动态</title>
+    <style>
+        :root {
+            --primary: #1A365D;
+            --accent: #C5A880;
+            --bg: #F8F9FA;
+        }
+
+        body {
+            font-family: '苹方-简', system-ui;
+            line-height: 1.8;
+            background: var(--bg);
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .newsroom {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 2rem;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+        }
+
+        .live-feed {
+            border-left: 4px solid var(--primary);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .news-card {
+            background: linear-gradient(to right, #fff, #f8f9fa);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-3px);
+        }
+    </style>
+    <script>
+        // 新闻事件类
+        class NewsEvent {
+            constructor(title, reporter, type) {
+                this.title = title;
+                this.reporter = reporter;
+                this.type = type;
+                this.publishTime = new Date();
+            }
+
+            dispatchAlert() {
+                console.log(`【${this.type}】${this.reporter}发回报道：${this.title}`);
+            }
+        }
+
+        // 突发新闻类
+        class BreakingNews extends NewsEvent {
+            constructor(title, reporter, urgency) {
+                super(title, reporter, '突发新闻');
+                this.urgency = urgency;
+            }
+
+            pushNotification() {
+                const alertBox = document.createElement('div');
+                alertBox.className = 'news-card';
+                alertBox.innerHTML = `
+                    <h3 style="color:var(--primary)">🚨 ${this.title}</h3>
+                    <p>记者：${this.reporter}｜${this.publishTime.toLocaleTimeString()}</p>
+                `;
+                document.querySelector('.live-feed').prepend(alertBox);
+            }
+        }
+
+        // 初始化新闻流
+        const newsFeed = [
+            new BreakingNews('强台风登陆东南沿海', '王记者', '红色预警'),
+            new NewsEvent('两会专题报道', '李记者', '时政新闻'),
+            new BreakingNews('科技峰会现场直击', '张记者', '现场快讯')
+        ];
+
+        // 模拟实时推送
+        setInterval(() => {
+            const types = ['经济', '社会', '国际'];
+            const newEvent = new NewsEvent(
+                `${types[Math.floor(Math.random() * 3)]}领域最新动态`,
+                '编辑部',
+                '实时更新'
+            );
+            newsFeed.push(newEvent);
+            newEvent.dispatchAlert();
+        }, 5000);
+    </script>
+</head>
+
+<body>
+    <div class="newsroom">
+        <div class="main-content">
+            <h1 style="color:var(--primary);border-bottom:3px solid var(--accent)">
+                📡 24小时新闻编辑部
+            </h1>
+
+            <div class="live-feed">
+                <h2>⏱️ 实时新闻流</h2>
+                <div class="news-card">
+                    <h3>📢 最新消息</h3>
+                    <p id="newsTimer"></p>
+                </div>
+            </div>
+        </div>
+
+        <div style="background:white;padding:1.5rem;border-radius:8px">
+            <h3>👥 值班团队</h3>
+            <div class="news-card">
+                <p>👩💻 编辑：李晓明</p>
+                <p>📷 摄影：王建国</p>
+                <p>🕵️ 校对：张芳芳</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
