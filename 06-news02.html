@@ -4,62 +4,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript 语法</title>
+    <title>数据新闻可视化平台</title>
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --accent: #18BC9C;
+            --bg: #ECF0F1;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui;
+            line-height: 1.6;
+            background: var(--bg);
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .data-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .data-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .chart {
+            height: 200px;
+            background: linear-gradient(to right, var(--primary), #34495E);
+            border-radius: 8px;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .chart::after {
+            content: '动态图表';
+            position: absolute;
+            color: white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
     <script>
-        // 类和对象
-        class Car {
-            constructor(brand, model, year) {
-                this.brand = brand
-                this.model = model
-                this.year = year
+        // 数据报告类
+        class DataReport {
+            constructor(title, category, data) {
+                this.title = title;
+                this.category = category;
+                this.data = data;
+                this.updateTime = new Date();
             }
-            start() {
-                console.log(`汽车 ${this.brand} ${this.model} 启动了`)
-            }
-            stop() {
-                console.log(`汽车 ${this.brand} ${this.model} 停止了`)
+
+            render() {
+                const card = document.createElement('div');
+                card.className = 'data-card';
+                card.innerHTML = `
+                    <h3 style="color:var(--primary)">${this.title}</h3>
+                    <div class="chart"></div>
+                    <p>更新时间：${this.updateTime.toLocaleTimeString()}</p>
+                `;
+                document.querySelector('.dashboard').appendChild(card);
             }
         }
-        let myCar = new Car('Mi', 'Yu7', 2025)
-        myCar.start()
-        myCar.stop()
 
-        class ElectricCar extends Car {
-            constructor(brand, model, year, range) {
-                super(brand, model, year)
-                this.range = range
+        // 实时数据类
+        class LiveData extends DataReport {
+            constructor(title, category, data, interval) {
+                super(title, category, data);
+                this.interval = interval;
+                this.startLiveUpdate();
             }
-            charge() {
-                console.log(`电动汽车 ${this.brand} ${this.model} 正在充电`)
+
+            startLiveUpdate() {
+                setInterval(() => {
+                    this.data = this.generateNewData();
+                    this.updateTime = new Date();
+                    this.render();
+                }, this.interval);
+            }
+
+            generateNewData() {
+                return Array.from({ length: 5 }, () => Math.floor(Math.random() * 100));
             }
         }
-        let myElectricCar = new ElectricCar('Tesla', 'Model Y', 2025, 300)
-        myElectricCar.start()
-        myElectricCar.charge()
 
-        // 回调函数练习
-        console.log('111111')
+        // 初始化仪表盘
+        new DataReport('年度经济趋势', '经济', [65, 59, 80, 81, 56]).render();
+        new LiveData('实时舆情指数', '社会', [], 3000);
 
-        setTimeout(function () {
-            console.log('22222')
-        }, 2000)
-
-        console.log('333333')
+        // 模拟异步数据加载
+        setTimeout(() => {
+            new DataReport('气候变化数据', '环境', [28, 48, 40, 19, 86]).render();
+        }, 1500);
     </script>
 </head>
 
 <body>
-    <h1 onclick="alert('我被点击了！')">JavaScript 语法</h1>
-    <div id="demo">div content</div>
+    <h1 style="color:var(--primary);text-align:center;margin-bottom:2rem">
+        📊 数据新闻可视化中心
+    </h1>
+    <div class="dashboard"></div>
 </body>
-
-<script>
-    myDom = document.getElementById('demo')
-    console.log(myDom)
-    myDom.innerHTML = '这是从脚本动态更改的内容'
-    myDom.onclick = function () {
-        alert('我也被点击了！')
-    }
-</script>
 
 </html>
